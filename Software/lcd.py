@@ -1,8 +1,19 @@
 from Adafruit_CharLCD import Adafruit_CharLCD
 import Adafruit_GPIO.PCF8574 as PCF
+import wiringpi as wiringpi
 import time
+from time import sleep
 import sys
 
+
+#Initialization of the Wiring Pi Library
+wiringpi.wiringPiSetup()
+wiringpi.wiringPiSetupGpio()
+wiringpi.wiringPiSetupPhys()
+wiringpi.pinMode(7, 1)
+
+
+#Getting the I2C address of the LCD
 GPIO = PCF.PCF8574(address=0x38)
 
 #Define PCF pins connected to the LCD
@@ -21,6 +32,12 @@ test = ' '.join(sys.argv[1:])
 if len(test)>16:
 	test = test[0:15] + "\n" + test[15:]
 
+#Display the Contents to the LCD. Turn on Backlight and turn off.
 print str(test)
 print "LCD ON"
+wiringpi.digitalWrite(7,1)
 lcd.message(str(test))
+sleep(5)
+wiringpi.digitalWrite(7,0)
+print "LCD OFF"
+
