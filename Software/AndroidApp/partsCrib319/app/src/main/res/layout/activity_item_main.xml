@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_light"
+    tools:context=".MainActivity">
+
+    
+    <ListView
+        android:id="@+id/listViewCategories"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.google.android.material.tabs.TabItem
+        android:id="@+id/item_search"
+        android:layout_width="41dp"
+        android:layout_height="12dp"
+        android:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/ic_action_search"
+        android:title="Search"
+        app:showAsAction="always|collapseActionView">
+
+    </com.google.android.material.tabs.TabItem>
+
+</RelativeLayout>
