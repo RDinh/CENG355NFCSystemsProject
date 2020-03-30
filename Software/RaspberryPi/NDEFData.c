@@ -211,9 +211,12 @@ void getNdef(void)
 	printf("%s",ndefMsg);
 
 	char cmdS[100] = "python lcd.py Phone Scanned\n";
+	char cmdP[100];
+	cmdP[0]='\0';
+	
+	sprintf(cmdP,"python lcd.py %s",ndefMsg);
 
-
-	system(cmdS);
+	system(cmdP);
 	sleep(1);
 	printf("\nDone...\n");
 }

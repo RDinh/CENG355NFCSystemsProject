@@ -50,7 +50,7 @@ int detectPresence(int fd)
 			pData.luminosity = getLuminosity(fd);
 			
 			fprintf(stdout,"Proximity:\t%d\t Luminosity:\t%d\n",pData.proximity,pData.luminosity);
-			if (pData.proximity > 2300)
+			if (pData.proximity > 3100)
 				return pData.proximity;
 			
 			usleep(300000);

@@ -4,6 +4,8 @@ import wiringpi as wiringpi
 import time
 from time import sleep
 import sys
+import os
+from OrderInfo import getItems
 
 
 #Initialization of the Wiring Pi Library
@@ -29,14 +31,31 @@ lcd.clear()
 
 test = ' '.join(sys.argv[1:])
 
-if len(test)>16:
-	test = test[0:15] + "\n" + test[15:]
+#os.system('python OrderInfo.py '+sys.argv[1])
+
+#if len(test)>16:
+#	test = test[0:15] + "\n" + test[15:]
+
+itemArray = getItems(str(sys.argv[1]))
+
+wiringpi.digitalWrite(7,1)
+i = 0
+while i < len(itemArray):
+    msg = ""
+    if (i + 1 < len(itemArray)):
+        msg = itemArray[i]+"\n"+ itemArray[i+1]
+    else:
+        msg = itemArray[i]
+    lcd.message(str(msg))
+    sleep(2)   
+    lcd.clear()
+    i+=2
 
 #Display the Contents to the LCD. Turn on Backlight and turn off.
 print str(test)
 print "LCD ON"
-wiringpi.digitalWrite(7,1)
-lcd.message(str(test))
+
+#lcd.message(str(test))
 sleep(5)
 wiringpi.digitalWrite(7,0)
 print "LCD OFF"
