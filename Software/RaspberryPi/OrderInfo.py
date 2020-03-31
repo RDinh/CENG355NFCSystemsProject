@@ -10,9 +10,42 @@ import requests
 
     
 def getItems(TID):
-    URL = "http://apollo.humber.ca/~n01267335/CENG319/adminQuery.php"
-
+    
+    itemArray = []
     TID = str(TID[1:])
+    if (TID[0] == 'R'):
+        TID = str(TID[1:])
+    
+        URL = "http://apollo.humber.ca/~n01267335/CENG319/actionQuery.php"
+        PARAMS = {'QReturnTID':TID}
+    
+        r = requests.get(url = URL, params = PARAMS) 
+    
+        data = r.json()
+        
+        itemArray.append("Return:")
+        itemArray.append(str(data["Status"]))
+        
+        print(TID+" Return: " +data["Status"])
+        
+    else:
+        URL = "http://apollo.humber.ca/~n01267335/CENG319/actionQuery.php"
+        PARAMS = {'TID':TID}
+    
+        r = requests.get(url = URL, params = PARAMS) 
+    
+        data = r.json()
+        
+        itemArray.append("Queued:")
+        itemArray.append(str(data["Status"]))
+        
+        print("Queued: " +data["Status"])
+    
+    
+    
+    
+    URL = "http://apollo.humber.ca/~n01267335/CENG319/adminQuery.php"
+    
 
     PARAMS = {'TID':TID} 
 
@@ -23,7 +56,7 @@ def getItems(TID):
 
     #print (data["data"])
 
-    itemArray = []
+    
     for d in data["data"]:
         print (d["ItemName"] + " " + d["Quantity"])
         if (len(d["ItemName"]) > 14):
